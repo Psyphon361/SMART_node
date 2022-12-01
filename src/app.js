@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+dotenv.config();
 import path from 'path';
 import url from 'url';
 import express from 'express';
@@ -10,10 +11,11 @@ import cookieSession from 'cookie-session';
 const app = express();
 
 app.use(cookieParser());
+
 app.use(
   cookieSession({
       name: "SMART",
-      keys: ["key1", "key2"],
+      keys: [process.env.TWITTER_ACCESS_TOKEN, process.env.TWITTER_ACCESS_SECRET],
   })
 );
 
@@ -30,13 +32,13 @@ app.set('views', viewsPath);
 app.use(express.static(publicDirectoryPath)); // Setup static directory to serve
 app.use(userRouter);
 
-dotenv.config();
+
 
 const port = process.env.PORT;
 
-// app.get('/*', (req, res) => {
-//   res.render('404');
-// });
+app.get('/*', (req, res) => {
+  res.render('404');
+});
 
 app.listen(port, function () {
   console.log('Server started on port ' + port);

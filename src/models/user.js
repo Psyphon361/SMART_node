@@ -8,13 +8,6 @@ import shared_data from '../shared-data/shared-vars.js';
 
 const userSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      unique: false,
-      trim: true,
-      default: 'NONAME',
-    },
-
     email: {
       type: String,
       unique: true,
@@ -35,95 +28,6 @@ const userSchema = new mongoose.Schema(
       default: 'NOPASS',
     },
 
-    // fname: {
-    //   type: String,
-    //   default: '*_*',
-    //   required: true,
-    //   trim: true,
-    // },
-
-    // lname: {
-    //   type: String,
-    //   default: '*_*',
-    //   required: true,
-    //   trim: true,
-    // },
-
-    // monthly_income: {
-    //   type: Number,
-    //   default: 0,
-    //   required: true,
-    //   trim: true,
-    // },
-
-    // family_members: {
-    //   type: Number,
-    //   default: 0,
-    //   validate(value) {
-    //     if (value < 0) {
-    //       throw new Error('family members count must be positive!');
-    //     }
-    //   },
-    //   required: true,
-    // },
-
-    // phone: {
-    //   type: Number,
-    //   default: 0,
-    //   required: true,
-    // },
-
-    // balance: {
-    //   type: Number,
-    //   default: 10,
-    //   required: true,
-    // },
-
-    // food: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // green_grocery: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // hotels: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // alcohol: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // clothes: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // house: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // health: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // education: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
-    // special_occasion: {
-    //   type: Number,
-    //   default: 0,
-    // },
-
     tokens: [
       {
         token: {
@@ -138,12 +42,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-// userSchema.virtual('invoices', {
-//   ref: 'Invoice',
-//   localField: '_id',
-//   foreignField: 'customer',
-// });
 
 // GENERATE AUTH TOKEN USING JWT
 userSchema.methods.generateAuthToken = async function () {

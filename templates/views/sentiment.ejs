@@ -1,0 +1,47 @@
+<%- include("../layouts/header.ejs") %>
+
+<div class="registration-form">
+  <form action="/sentiment" method="POST">
+    <div class="pl-1 text-center">
+      <img width="300px" src="/images/logo.png" alt="small-logo" />
+    </div>
+
+    <h3
+      class="pb-4"
+      style="
+        color: #fff;
+        margin: auto;
+        text-align: center;
+        font-size: 34px !important;
+      "
+    >
+      Sentiment Analysis
+    </h3>
+    <div class="form-group">
+      <label
+        style="color: #fff; font-size: 20px !important"
+        for="url"
+        >Enter Text</label
+      >
+
+      <textarea
+        rows="6"
+        style="border-radius: 0.2rem !important"
+        id="email"
+        type="text"
+        class="form-control"
+        name="url"
+        required
+        autofocus
+      > </textarea>
+    </div>
+
+    <div class="text-center">
+      <button class="upload-invoice-btn" type="submit" value="submit">
+        Send Request
+      </button>
+    </div>
+  </form>
+</div>
+
+<%- include("../layouts/footer.ejs") %>

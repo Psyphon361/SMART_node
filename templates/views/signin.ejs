@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  style="background-color: #131117 !important; overflow-y: hidden;">
+<html lang="en" style="background-color: #131117 !important;">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -34,55 +34,63 @@
     ></script>
   </head>
 
-  <body style="background-color: #131117">
+  <body style="background-color: #131117;">
     <section class="">
-      <div class="container pt-md-3 p-1 m-1">
+      <div class="container pt-md-3 p-5 m-1">
         <div class="row">
           <div class="col">
             <a class="px-md-4 mx-md-3 p-1 m-1" href="/">
               <img
                 class="signup-header-img mx-md-5"
                 src="images/logo.png"
-                alt="checqpro-logo"
+                alt="bitly-logo"
               />
             </a>
           </div>
         </div>
       </div>
     </section>
-    <section class="form-section pt-lg-0 pt-4">
+    <section class="form-section">
       <div class="container-fluid">
         <div class="row">
-          <div class="col pt-md-3 px-md-5 mx-md-5">
+          <div class="col pt-md-3 pt-1 px-md-5 mx-md-5">
             <form method="POST" class="form-signin px-md-5">
               <div class="py-4 form-heading" style="text-align: center">
-                <h3>Register to get started</h3>
+                <h3>Log in to access all features</h3>
                 <span
-                  >Already have an account?
-                  <a class="top-link" href="/signin"><u>Log in</u></a>
+                  >Don't have an account?
+                  <a class="top-link" href="/signup"><u>Sign Up</u></a>
                 </span>
               </div>
 
-              <a
-                class="btn btn-sm btn-primary btn-block btn-signup mt-3"
-                href="/google"
-              >
-                <i class="fab fa-google"></i>
-                Sign up with Google
-              </a>
+              <p style="text-align: center; color: #fff;">Log in with:</p>
 
-              <a
-                class="btn btn-sm btn-primary btn-block btn-signup mb-3"
-                href="/twitter"
-              >
-                <i class="fab fa-twitter"></i>
+              <div class="container pt-4 ml-2">
+                <div class="row third-party pl-3">
+                  <div
+                    class="col-sm-6 col-12 py-lg-0 py-2 ml-lg-0 ml-3 align-items-center"
+                  >
+                    <a
+                      class="btn btn-sm btn-primary btn-block btn-signin"
+                      href="/google"
+                    >
+                      <i class="fab fa-google"></i> Google
+                    </a>
+                  </div>
 
-                Sign up with Twitter
-              </a>
+                  <div class="col-sm-6 col-12 pt-lg-0 pt-2 ml-lg-0 ml-3">
+                    <a
+                      class="btn btn-sm btn-primary btn-block btn-signin"
+                      href="/twitter"
+                    >
+                      <i class="fab fa-twitter"></i>
+                      Twitter
+                    </a>
+                  </div>
+                </div>
+              </div>
 
-              <label style="padding-top: 15px" class="input-label" for="email"
-                >Email address</label
-              >
+              <label class="input-label" for="email">Email address</label>
               <input
                 style="border-radius: 0.2rem !important"
                 id="email"
@@ -90,11 +98,8 @@
                 class="form-control"
                 name="email"
                 required
+                autofocus
               />
-
-              <% if(shared_data.email_flag===true) { %>
-              <h6 style="font-size: 14px">Email already used</h6>
-              <% } %>
 
               <label
                 style="padding-top: 15px"
@@ -111,30 +116,16 @@
                 required
               />
 
-              <% if(shared_data.strong_password===false) { %>
-              <h6 style="font-size: 14px">Please choose a strong password!</h6>
+              <% if(shared_data.valid_user===false) { %>
+              <h6 style="font-size: 14px">Invalid Credentials. Try Again.</h6>
               <% } %>
 
-              <div class="container-fluid password-check">
-                <div class="row py-1">
-                  <div class="col-md-4 col-12">• 6+ characters</div>
-                  <div class="col-md-8 col-12">• One Upper & Lowercase</div>
-                </div>
-
-                <div class="row pb-4 py-1">
-                  <div class="col-md-4 col-12">• One number</div>
-                  <div class="col-md-8 col-12">
-                    • Special characters (@$!%*?&)
-                  </div>
-                </div>
-              </div>
-
               <button
-                class="btn btn-lg btn-primary btn-block btn-signup-email"
+                class="btn btn-lg btn-primary btn-block btn-signup-email mt-5"
                 type="submit"
                 value="submit"
               >
-                Sign up with Email
+                Log in
               </button>
             </form>
           </div>
