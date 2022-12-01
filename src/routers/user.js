@@ -167,7 +167,7 @@ router.post('/sentiment', async (req, res) => {
   // console.log(encoded_text);
 
   const response = await fetch(
-    `https://6e7e-2402-8100-2046-d965-1038-d560-fe30-1a3.in.ngrok.io?text=${encoded_text}&isURL=0`,
+    `https://5857-51-79-243-123.ap.ngrok.io/sentiment?text=${encoded_text}`,
     {
       method: 'GET',
       headers: {
@@ -189,7 +189,7 @@ router.post('/sentiment', async (req, res) => {
   if (max === positive) {
     percent['Positive'] = max * 100;
   } else if (max === negative) {
-    percent['Pegative'] = max * 100;
+    percent['Negative'] = max * 100;
   } else {
     percent['Neutral'] = max * 100;
   }
@@ -212,7 +212,7 @@ router.get('/results', async (req, res) => {
 router.get('/fake_news', (req, res) => {
   res.render('fake_news', {
     shared_data,
-    title: 'SMART | Sentiment Analysis',
+    title: 'SMART | Fake News',
   });
 });
 
@@ -237,7 +237,7 @@ router.post('/fake_news', async (req, res) => {
   // console.log(encoded_text);
 
   const response = await fetch(
-    `https://be24-2402-8100-2040-8118-b09c-4184-cfcf-32b8.in.ngrok.io/fake_news?text=${encoded_text}&isURL=0`,
+    `https://5857-51-79-243-123.ap.ngrok.io//fake_news?text=${encoded_text}`,
     {
       method: 'GET',
       headers: {
@@ -258,10 +258,163 @@ router.post('/fake_news', async (req, res) => {
   });
 });
 
-router.get('/product_mining', (req, res) => {
-  res.render('sentiment', {
+router.get('/fake_id', (req, res) => {
+  res.render('fake_id', {
+    title: 'SMART | Fake ID',
     shared_data,
-    title: 'SMART | Sentiment Analysis',
+  });
+});
+
+router.post('/fake_id', async (req, res) => {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const username = req.body.uname.trim();
+
+  const response = await fetch(
+    `https://5857-51-79-243-123.ap.ngrok.io/fake_profile?username=${username}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      agent,
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+
+  res.render('fake_id_result', {
+    title: 'Fake Profile Result',
+    result: data,
+    shared_data,
+    username
+  });
+});
+
+router.get('/product', (req, res) => {
+  res.render('product_mining', {
+    shared_data,
+    title: 'SMART | Product Mining',
+  });
+});
+
+router.get('/opinion', (req, res) => {
+  res.render('opinion_mining', {
+    shared_data,
+    title: 'SMART | Opinion Mining',
+  });
+});
+
+router.post('/opinion', async (req, res) => {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const text = req.body.url;
+
+  // console.log(text);
+  const encoded_text = encodeURIComponent(text.trim());
+  console.log(encoded_text);
+
+  const response = await fetch(
+    `https://5857-51-79-243-123.ap.ngrok.io/opinion_mining?query=${encoded_text}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      agent,
+    }
+  );
+
+  const data = await response.json();
+
+  const positive = data.count_pos;
+  const negative = data.count_neg;
+  const neutral = data.count_neu;
+  const sum = positive + negative + neutral;
+
+  const percent = {};
+
+  const max = Math.max(Number(positive), Number(negative), Number(neutral));
+  if (max === positive) {
+    percent['Positive'] = Math.round(((max / sum) * 100) * 100) / 100;
+  } else if (max === negative) {
+    percent['Negative'] = Math.round(((max / sum) * 100) * 100) / 100;
+  } else {
+    percent['Neutral'] = Math.round(((max / sum) * 100) * 100) / 100;
+  }
+
+  res.render('results', {
+    title: 'SMART | Result',
+    shared_data,
+    positive,
+    negative,
+    neutral,
+    percent,
+    text,
+  });
+});
+
+router.get('/product', (req, res) => {
+  res.render('product_mining', {
+    shared_data,
+    title: 'SMART | Product Mining',
+  });
+});
+
+router.post('/product', async (req, res) => {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const text = req.body.url;
+
+  const encoded_text = encodeURIComponent(text.trim());
+  console.log(encoded_text);
+
+  const response = await fetch(
+    `https://5857-51-79-243-123.ap.ngrok.io/product_mining?query=${encoded_text}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      agent,
+    }
+  );
+
+  const data = await response.json();
+
+  const positive = data.count_pos;
+  const negative = data.count_neg;
+  const neutral = data.count_neu;
+  const sum = positive + negative + neutral;
+
+  const percent = {};
+
+  const max = Math.max(Number(positive), Number(negative), Number(neutral));
+  if (max === positive) {
+    percent['Positive'] = Math.round(((max / sum) * 100) * 100) / 100;
+  } else if (max === negative) {
+    percent['Negative'] = Math.round(((max / sum) * 100) * 100) / 100;
+  } else {
+    percent['Neutral'] = Math.round(((max / sum) * 100) * 100) / 100;
+  }
+
+  res.render('results', {
+    title: 'SMART | Result',
+    shared_data,
+    positive,
+    negative,
+    neutral,
+    percent,
+    text,
   });
 });
 
@@ -300,7 +453,7 @@ router.post('/news', async (req, res) => {
 });
 
 router.get('/news_feed', (req, res) => {
-  if(news_feed.status !== 'ok') {
+  if (news_feed.status !== 'ok') {
     console.log('Error! Unable to fetch the requested news.');
   } else {
     const news_list = news_feed.articles.slice(0, 25);

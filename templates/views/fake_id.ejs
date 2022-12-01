@@ -1,7 +1,7 @@
 <%- include("../layouts/header.ejs") %>
 
   <div class="registration-form">
-    <form action="/product" method="POST">
+    <form action="/fake_id" method="POST">
       <div class="pl-1 text-center">
         <img width="300px" src="/images/logo.png" alt="small-logo" />
       </div>
@@ -12,13 +12,12 @@
         text-align: center;
         font-size: 34px !important;
       ">
-        Product Mining
+        Fake Profile Detection
       </h3>
       <div class="form-group">
-        <label style="color: #fff; font-size: 20px !important" for="url">Enter Text</label>
-
-        <textarea rows="4" style="border-radius: 0.2rem !important" id="email" type="text" class="form-control"
-          name="url" required autofocus> </textarea>
+        <label style="color: #fff; font-size: 20px !important" for="url">Enter Twitter Username</label>
+        <input style="border-radius: 0.2rem !important" id="password" type="text" class="form-control mb-4" name="uname"
+          required />
       </div>
 
       <div class="text-center">

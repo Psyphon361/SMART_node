@@ -1139,6 +1139,7 @@ h3 {
 }
 
 .upload-invoice-btn {
+  font-size: 20px;
   border: none;
   outline: none;
   border-radius: 1.5rem;

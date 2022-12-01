@@ -1,0 +1,120 @@
+<%- include("../layouts/header.ejs") %>
+  <section class="py-5 test-bg">
+
+    <div class="container">
+      <div class="row px-5">
+        <div class="col text-center">
+          <h4 class="">
+            PROVIDED PROFILE
+          </h4>
+        </div>
+
+      </div>
+      <div style="" class="row px-5">
+        <div style="background-color: #eeeeee;" class="col given-text">
+          <div class="text-center pt-3"><h5>Twitter Username: @<%= username %></h5></div> <br>
+            <div class="text-center pt-4 pb-2">
+              <% if(!result) { %>
+                <h4 style="color: #1EC162; font-weight: 500;">GIVEN PROFILE IS LEGITIMATE</h4>
+                <% } else { %>
+                  <h4 style="color: #e81a00; font-weight: 500;">GIVEN PROFILE IS FAKE</h4>
+                  <% } %>
+
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <% if(!result) { %>
+            <img width="80%" src="/images/real_news.png" alt="">
+            <% } else { %>
+              <img width="80%" src="/images/fake_news.png" alt="">
+              <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="maytrix-footer">
+    <div style="background-color: #000;" class="container-fluid pb-0 mb-0 justify-content-center text-light">
+      <footer>
+        <div class="row  justify-content-center py-5">
+          <div class="col-11">
+            <div class="row">
+              <div class="col-lg-4 col-12 mx-auto">
+
+                <a class="navbar-brand" href="/">
+                  <img class="ml-md-2 mb-5 img-fluid" width="250px" src="/images/logo.png" alt="cafe-logo" /></a>
+              </div>
+
+
+              <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                <h6 class="mb-3 mb-lg-4 bold-text "><b>Our Team</b></h6>
+                <ul class="list-unstyled">
+                  <li>
+                    <p><span class="text-color">Jappreet Kaur
+                    </p>
+                  </li>
+                  <li>
+                    <p><span class="text-color">Ekarth Jain
+                    </p>
+                  </li>
+                  <li>
+                    <p><span class="text-color">Tanish Sharma
+                    </p>
+                  </li>
+                  <li>
+                    <p><span class="text-color">Rakshit
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-lg-2 col-md-4 col-sm-4 col-12 pt-5 pt-lg-0">
+                <h6 class="mb-3 mb-lg-4 bold-text "><b>MENU</b></h6>
+                <ul class="list-unstyled">
+                  <a href="/">
+                    <li>Home</li>
+                  </a>
+                  <a href="/add-invoice">
+                    <li>Fake News</li>
+                  </a>
+                  <a href="/about">
+                    <li>Fake ID</li>
+                  </a>
+                  <a href="/">
+                    <li>Sentiment Analysis</li>
+                  </a>
+                  <a href="/">
+                    <li>Opinion Mining</li>
+                  </a>
+                  <a href="/">
+                    <li>Product Mining</li>
+                  </a>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-4 col-12">
+                <h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>ADDRESS</b></h6>
+                <p class="mb-1">605, RATAN ICON BUILDING</p>
+                <p>SEAWOODS SECTOR</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+  </body>
+
+  </html>
