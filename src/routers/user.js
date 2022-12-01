@@ -13,6 +13,8 @@ import '../oauth/google.js';
 import '../oauth/twitter.js';
 
 const router = new express.Router();
+let news_feed;
+let news_topic;
 
 router.get('/', async (req, res) => {
   const token = req.cookies.jwt;
@@ -92,7 +94,7 @@ router.post('/signup', async (req, res) => {
 
       shared_data.user_is_authenticated = true;
 
-      res.status(201).redirect('/signup'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
+      res.status(201).redirect('/'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
     } catch (e) {
       res.status(400);
     }
@@ -252,15 +254,8 @@ router.post('/fake_news', async (req, res) => {
     title: 'Fake News Result',
     trimmed_string,
     result: data,
-    shared_data
+    shared_data,
   });
-
-  // res.render('news_result', {
-  //   title: 'Fake News Result',
-  //   trimmed_string,
-  //   result: true,
-  //   shared_data,
-  // });
 });
 
 router.get('/product_mining', (req, res) => {
@@ -268,6 +263,62 @@ router.get('/product_mining', (req, res) => {
     shared_data,
     title: 'SMART | Sentiment Analysis',
   });
+});
+
+router.get('/news', (req, res) => {
+  res.render('news', {
+    shared_data,
+    title: 'SMART | News',
+  });
+});
+
+router.post('/news', async (req, res) => {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  const topic = req.body.topic;
+  news_topic = topic;
+  const encoded_topic = encodeURIComponent(topic.trim());
+  // console.log(encoded_topic);
+
+  const response = await fetch(
+    `https://newsapi.org/v2/everything?q=${encoded_topic}&from=2022-11-01&sortBy=publishedAt&apiKey=ab2424601f254d719d41af7d70f9798d`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      agent,
+    }
+  );
+  news_feed = await response.json();
+
+  res.redirect('/news_feed');
+  // console.log(news_feed);
+});
+
+router.get('/news_feed', (req, res) => {
+  if(news_feed.status !== 'ok') {
+    console.log('Error! Unable to fetch the requested news.');
+  } else {
+    const news_list = news_feed.articles.slice(0, 25);
+
+    res.render('news_feed', {
+      title: 'SMART | News Feed',
+      news_list,
+      topic: news_topic,
+      shared_data,
+    });
+  }
+
+  // res.render('news_feed', {
+  //   title: 'SMART | News Feed',
+  //   // news_list,
+  //   news_topic,
+  //   shared_data,
+  // });
 });
 
 // GOOGLE OAUTH
@@ -291,7 +342,7 @@ router.get(
 
     shared_data.user_is_authenticated = true;
 
-    res.status(201).redirect('/register'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
+    res.status(201).redirect('/'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
   }
 );
 
@@ -317,7 +368,7 @@ router.get(
 
     shared_data.user_is_authenticated = true;
 
-    res.status(201).redirect('/register'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
+    res.status(201).redirect('/'); // REDIRECT TO REGISTRATION FORM AFTER SIGNUP
   }
 );
 

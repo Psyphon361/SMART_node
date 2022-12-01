@@ -1,0 +1,58 @@
+<%- include("../layouts/header.ejs") %>
+
+
+<div class="registration-form">
+  <form action="/news" method="POST">
+    <div class="pl-1 text-center">
+      <img width="300px" src="/images/logo.png" alt="small-logo" />
+    </div>
+
+    <h3
+      class="pb-4"
+      style="
+        color: #fff;
+        margin: auto;
+        text-align: center;
+        font-size: 34px !important;
+      "
+    >
+      News Feed
+    </h3>
+    <div class="form-group">
+      <label
+        style="color: #fff; font-size: 20px !important"
+        for="url"
+        >Enter the category of news you are looking for. <br>For example: Sports, Health, Finance, Twitter, Crypto etc.</label
+      >
+
+      <input
+      style="border-radius: 0.2rem !important"
+      id="password"
+      type="text"
+      class="form-control my-4"
+      name="topic"
+      required
+    />
+    </div>
+
+    <div class="text-center">
+      <button class="upload-invoice-btn" type="submit" value="submit">
+        Fetch Related News Articles 
+      </button>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- <section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<%- include("../layouts/footer.ejs") %>
